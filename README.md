@@ -1,6 +1,6 @@
 # Project Management System - React Firebase App
 
-Welcome to the Project Management System, a web application developed by TDP Developers. This project is built using React and is hosted on Firebase. You can access the live website [here](https://report-c860b.web.app/).
+Welcome to the Project Management System, a web application developed by TDP Developers. This project is built using React and is hosted on Firebase. You can access the live website [here](https://report-c860b.web.app/). 
 
 ## Table of Contents
 
