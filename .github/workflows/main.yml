@@ -34,5 +34,4 @@ jobs:
         env:
           GCP_SA_KEY: ${{ secrets.Letest_Firebase_Service_Token }}
           PROJECT_ID: tdp-reports-c4ee8
-          CI: true
           FIREBASE_DEPLOY_TOKEN: ${{ secrets.LETEST_FIREBASE_TOCKEN }}
