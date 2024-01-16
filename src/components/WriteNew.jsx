@@ -210,7 +210,7 @@ const WriteNew = () => {
           Completed Task :-
         </h5>
         <div className="flex flex-col gap-y-4">
-          {completeTask.map((ct, i) => (
+          {completeTask.map((ct, i) => ( 
             <div
               key={i}
               className="w-full flex items-center gap-x-2"
