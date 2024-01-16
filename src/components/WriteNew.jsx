@@ -205,7 +205,7 @@ const WriteNew = () => {
   };
 
   return (
-    <div className="h-full w-full md:flex gap-10 p-8">
+    <div className="h-full w-full md:flex gap-10 p-8 ">
       <div>
         {isPrint && (
           <PDFViewer style={{ width: "100vw", height: "100vh" }}>
