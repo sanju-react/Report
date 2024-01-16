@@ -205,7 +205,7 @@ const WriteNew = () => {
   };
 
   return (
-    <div className="h-full w-full md:flex p-8">
+    <div className="h-full w-full md:flex gap-10 p-8">
       <div>
         {isPrint && (
           <PDFViewer style={{ width: "100vw", height: "100vh" }}>
@@ -249,7 +249,7 @@ const WriteNew = () => {
 
         {/* <PrintDocument/> */}
       </div>
-      <div className="md:px-8 md:w-1/2 w-full flex flex-col mb-5">
+      <div className=" md:px-20 md:w-1/2 w-full flex flex-col mb-5">
         {/* <p>Date:- <span className='mx-2'>{new Date().getDate()}-{new Date().getMonth() + 1}-{new Date().getFullYear()}</span></p> */}
         {/* <FormDataSend data={[completeTask, pendingTask]} /> */}
         {isModalOpen && (
