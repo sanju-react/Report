@@ -4,8 +4,12 @@ import EmailForm from "../layout/EmailForm.js";
 import ReactToPrint from "react-to-print";
 import { PDFViewer } from "@react-pdf/renderer";
 import PrintDocument from "./PrintDocument.js";
+import msg from "../utils/greeting.js";
+
 
 const WriteNew = () => {
+  var completeText = "";
+  var pendingText = "";
   const [completeTask, setCompleteTask] = useState([
     { id: 1, text: "", photo: "" },
     { id: 2, text: "", photo: "" },
@@ -505,13 +509,19 @@ const WriteNew = () => {
           pendingTask[0].text !== "" ||
           comment !== "") && (
           <>
-            <div className="text-xl font-semibold text-left">Hi,</div>
+            <div className="text-xl font-semibold text-left">Hi, {msg()}</div>
             <div className="text-xl font-semibold text-left">
               Date: {new Date().getDate()}-{new Date().getMonth() + 1}-
               {new Date().getFullYear()}
             </div>
             <div className="text-xl font-semibold text-left my-2">
-              I've completed task as below:
+              {completeTask.map((ct) => {
+                if (ct.text !== "") {
+                  completeText = "Complete Task :-";
+                }
+              })}
+
+              {completeText}
             </div>
 
             <div className="mt-3">
@@ -527,7 +537,12 @@ const WriteNew = () => {
               )}
             </div>
             <div className="text-xl font-semibold text-left my-2">
-              Pending task as below:
+              {pendingTask.map((ct) => {
+                if (ct.text !== "") {
+                  pendingText = "Pending Task:-";
+                }
+              })}
+              {pendingText}
             </div>
 
             <div className="mt-3">
@@ -544,7 +559,7 @@ const WriteNew = () => {
             </div>
 
             <div className="text-xl font-semibold text-left my-2">
-              Comment as below:
+            {comment ? "Comment as below:" : ""}
             </div>
             <div className="mt-3">
               <p className="text-xl text-left decoration-list">{comment}</p>
