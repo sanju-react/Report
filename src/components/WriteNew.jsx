@@ -205,7 +205,7 @@ const WriteNew = () => {
   };
 
   return (
-    <div className="w-3/4 flex">
+    <div className="h-full w-full md:flex p-8">
       <div>
         {isPrint && (
           <PDFViewer style={{ width: "100vw", height: "100vh" }}>
@@ -249,7 +249,7 @@ const WriteNew = () => {
 
         {/* <PrintDocument/> */}
       </div>
-      <div className="w-1/2 p-8 flex flex-col">
+      <div className=" md:px-20 md:w-1/2 w-full flex flex-col mb-5">
         {/* <p>Date:- <span className='mx-2'>{new Date().getDate()}-{new Date().getMonth() + 1}-{new Date().getFullYear()}</span></p> */}
         {/* <FormDataSend data={[completeTask, pendingTask]} /> */}
         {isModalOpen && (
@@ -504,7 +504,8 @@ const WriteNew = () => {
           </button>
         </div>
       </div>
-      <div className="w-1/2 p-10">
+      <div className="md:w-1/2 w-full p-10 shadow-lg rounded-xl  border-2">
+        <h1 className="text-center text-xl font-bold">Daily Reports</h1>
         {(completeTask[0].text !== "" ||
           pendingTask[0].text !== "" ||
           comment !== "") && (
@@ -566,6 +567,11 @@ const WriteNew = () => {
             </div>
           </>
         )}
+        {
+          (completeTask[0].text === "" &&
+          pendingTask[0].text === "" &&
+          comment === "") && <span className="h-full w-full flex justify-center items-center">No Report!</span>
+        }
       </div>
     </div>
   );
