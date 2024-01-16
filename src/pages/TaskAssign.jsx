@@ -11,6 +11,19 @@ const TaskAssign = () => {
   const [assignProject, setAssignProject] = useState({});
   const [activeTask, setActiveTask] = useState(null);
   const [api, contextHolder] = notification.useNotification();
+
+  const getCurrentDate = () => {
+    var currentDate = new Date();
+    var updatedDate =
+      currentDate.getDate() +
+      "-" +
+      (currentDate.getMonth() + 1) +
+      "-" +
+      currentDate.getFullYear();
+
+    return updatedDate;
+  };
+
   const openNotificationWithIcon = (type, description) => {
     api[type]({
       message: type,
@@ -67,6 +80,7 @@ const TaskAssign = () => {
       setAssignTask({});
     }
   };
+
   const editRow = () => {
     let task = [...taskArr];
     task[index] = assignTask;
@@ -106,6 +120,8 @@ const TaskAssign = () => {
     let tasks = [...taskArr];
     if (JSON.stringify(tasks).includes("stop") === false) {
       tasks[projI]["tasks"][i]["timer"] = val;
+      tasks[projI]["tasks"][i]["lastUpdated"] = "";
+
       setActiveTask({
         id: tasks[projI]["tasks"][i]["id"],
         isRunning: true,
@@ -164,6 +180,7 @@ const TaskAssign = () => {
   const stopTimer = (i, val, projI) => {
     let task = [...taskArr];
     task[projI]["tasks"][i]["timer"] = val;
+    task[projI]["tasks"][i]["lastUpdated"] = getCurrentDate();
 
     setTaskArr(task);
     localStorage.setItem("tasks", JSON.stringify(task));
@@ -255,6 +272,7 @@ const TaskAssign = () => {
           .filter((ts) => ts.project !== "")
           .map((ts, ind) => (
             <div
+              key={ind}
               className="h-[300px] w-[90%] my-4 p-3 overflow-y-scroll"
               style={{ boxShadow: "0px 0px 9px 4px rgb(0 0 0 / 0.25)" }}
             >
