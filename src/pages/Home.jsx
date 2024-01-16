@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Form from './Form'
+import img from '../resourse/img.jpg'
 
 const forms = [
   {
@@ -31,9 +32,36 @@ const Home = () => {
   }
   return (
     <>
-    <div>Home</div>
-    {/* <Form forms={forms}/> */}
-    {/* <input type="text" value={age} onChange={setInput} placeholder='0' style={{border:'1px solid black', padding: '10px'}}/> */}
+    <div>
+    <section className=" h-screen w-screen dark:bg-gray-800 dark:text-gray-100 bg-indigo-100" >
+	<div className="container grid gap-6 mx-auto text-center lg:grid-cols-2 xl:grid-cols-5">
+  <div className="w-full flex justify-center items-center  px-6 py-16 rounded-md sm:px-12 md:px-16 xl:col-span-2 dark:bg-gray-900">
+		
+    <div className="w-full  px-6 py-16 rounded-md sm:px-12 md:px-16 xl:col-span-2 dark:bg-gray-900">
+			<span className="block mb-2 dark:text-violet-400">Project Management system</span>
+			<h1 className="text-4xl font-extrabold dark:text-gray-50">"Your Projects, Our Passion - TDP Excellence."</h1>
+			<p className="my-8">
+				<span className="font-medium dark:text-gray-50">TDP. {''}</span>we understand that effective project management is the cornerstone of success in today's dynamic business landscape.
+			</p>
+			<form novalidate="" action="" className="self-stretch space-y-3">
+				<div>
+					<label for="name" className="text-sm sr-only">Your name</label>
+					<input id="name" type="text" placeholder="Your name" className="w-full p-2 rounded-md focus:ring focus:ri dark:border-gray-700 border solid"/>
+				</div><br/>
+				<div>
+					<label for="lastname" className="text-sm sr-only">Email address</label>
+					<input id="lastname" type="text" placeholder="Email address" className="w-full  p-2 rounded-md focus:ring focus:ri dark:border-gray-700"/>
+				</div>
+				{/* <button type="button" className="w-full py-2 font-semibold rounded dark:bg-violet-400 dark:text-gray-900">Join the waitlist</button> */}
+			</form>
+		</div>
+    </div>
+    
+		<img src={img} alt="" className="object-cover w-screen h-screen rounded-md xl:col-span-3 dark:bg-gray-500"/>
+	</div>
+</section>
+    </div>
+    
     </>
   )
 }
