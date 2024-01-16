@@ -249,7 +249,7 @@ const WriteNew = () => {
 
         {/* <PrintDocument/> */}
       </div>
-      <div className=" md:px-20 md:w-1/2 w-full flex flex-col mb-5">
+      <div className=" md:w-1/2 w-full flex flex-col mb-5">
         {/* <p>Date:- <span className='mx-2'>{new Date().getDate()}-{new Date().getMonth() + 1}-{new Date().getFullYear()}</span></p> */}
         {/* <FormDataSend data={[completeTask, pendingTask]} /> */}
         {isModalOpen && (
@@ -504,8 +504,8 @@ const WriteNew = () => {
           </button>
         </div>
       </div>
-      <div className="md:w-1/2 w-full p-10 shadow-lg rounded-xl  border-2">
-        <h1 className="text-center text-xl font-bold">Daily Reports</h1>
+      <div className="md:w-1/2 w-full p-5 shadow-lg rounded-xl  border-2">
+        <h1 className="text-center text-xl font-bold mb-5">Daily Reports</h1>
         {(completeTask[0].text !== "" ||
           pendingTask[0].text !== "" ||
           comment !== "") && (
