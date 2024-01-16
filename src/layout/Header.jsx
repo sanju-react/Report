@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <>
       <div className="  flex w-full justify-between h-[10vh] px-3 text-white border-t-gray-300 border bottom-2 bg-[#13253D] font-extralight  ">
-        <div className=" w-[5%] h-full">
+        <div className=" w-[5%] h-full overflow-hidden">
           <Link to="/">
             <img className="aspect-auto " src={logo} />
           </Link>
