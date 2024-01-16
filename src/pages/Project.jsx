@@ -53,7 +53,8 @@ const ProjectAssign = () => {
   };
   const handleOk = () => {
     addRow();
-    showModal("");
+
+    // showModal("");
     // console.log("submit");
   };
   const handleCancel = () => {
