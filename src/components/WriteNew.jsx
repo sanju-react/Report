@@ -249,7 +249,7 @@ const WriteNew = () => {
 
         {/* <PrintDocument/> */}
       </div>
-      <div className=" md:px-20 md:w-1/2 w-full flex flex-col mb-5">
+      <div className="md:px-8 md:w-1/2 w-full flex flex-col mb-5">
         {/* <p>Date:- <span className='mx-2'>{new Date().getDate()}-{new Date().getMonth() + 1}-{new Date().getFullYear()}</span></p> */}
         {/* <FormDataSend data={[completeTask, pendingTask]} /> */}
         {isModalOpen && (
