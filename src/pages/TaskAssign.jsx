@@ -513,13 +513,20 @@ const TaskAssign = () => {
             </select>
           </div>
         </div>
-        <div className="w-full flex justify-end">
+        <div className="w-full gap-4  flex justify-end">
+        <button
+            className="bg-red-600 rounded-lg text-white py-2 px-4"
+            onClick={handleOk}
+          >
+            Reset
+          </button> {''}
           <button
-            className="bg-green-900 text-white py-2 px-4"
+            className="bg-green-900 rounded-lg text-white py-2 px-4"
             onClick={handleOk}
           >
             Submit
           </button>
+          
         </div>
       </Modal>
     </>
