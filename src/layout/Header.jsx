@@ -5,33 +5,60 @@ import logo from "../resourse/LOGO.png";
 const Header = () => {
   const [sideMenu, setSideMenu] = useState(false);
 
-  
-
   return (
     <>
-      <div className={`  fixed ${sideMenu ? "flex" : "hidden"} md:hidden items-center gap-5 flex-col  p-6  left-0 top-0 h-screen  w-1/2 bg-gray-100`}>
-        <Link to="/">
+      <div
+        className={`  fixed ${
+          sideMenu ? "flex" : "hidden"
+        } md:hidden z-30 items-center gap-5 flex-col  p-6  left-0 top-0 h-screen  w-1/2 bg-gray-100`}
+      >
+        <Link
+          to="/"
+          onClick={() => {
+            setSideMenu(!sideMenu);
+          }}
+        >
           <img className="aspect-auto" src={logo} />
         </Link>
-        <Link to="/new">
+        <Link
+          to="/new"
+          onClick={() => {
+            setSideMenu(!sideMenu);
+          }}
+        >
           <h1 className="hover:underline">New Report</h1>
         </Link>
 
-        <Link to="/assign">
+        <Link
+          to="/assign"
+          onClick={() => {
+            setSideMenu(!sideMenu);
+          }}
+        >
           <h1 className="hover:underline">Assigned Task</h1>
         </Link>
 
-        <Link to="/show">
+        <Link
+          to="/show"
+          onClick={() => {
+            setSideMenu(!sideMenu);
+          }}
+        >
           <h1 className="hover:underline">Show Previous</h1>
         </Link>
 
-        <Link to="/projects">
+        <Link
+          to="/projects"
+          onClick={() => {
+            setSideMenu(!sideMenu);
+          }}
+        >
           <h1 className="hover:underline">Project</h1>
         </Link>
       </div>
 
       <div className="  flex w-full justify-between h-[10vh]  border-t-gray-300 px-5">
-        <div className=" w-44 h-full overflow-hidden  flex justify-center items-center">
+        <div className=" w-44 h-full overflow-hidden py-2 flex justify-center items-center">
           <Link to="/">
             <img className="aspect-auto" src={logo} />
           </Link>
@@ -63,18 +90,16 @@ const Header = () => {
             Projects
           </Link>
         </div>
-        <div className=" md:hidden  flex  justify-end items-center  h-full text-black  gap-5 w-3/4  font-thin">
-          <span 
-          onClick={()=>{
-            setSideMenu(!sideMenu)
-          }}
+        <div className=" md:hidden  flex  justify-end items-center  h-full text-black  gap-5 w-1/2  font-thin">
+          <span
+            onClick={() => {
+              setSideMenu(!sideMenu);
+            }}
           >
-            
-            
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
+              width="26"
+              height="26"
               fill="currentColor"
               className="bi bi-list"
               viewBox="0 0 16 16"

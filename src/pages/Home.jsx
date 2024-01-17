@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Form from "./Form";
 import img from "../resourse/img.jpg";
+import { Link } from "react-router-dom";
 
 const forms = [
   {
@@ -43,20 +44,20 @@ const Home = () => {
         <div className="items-center px-8 py-12 mx-auto max-w-7xl lg:px-16 md:px-12 lg:py-24">
           <div className="justify-center w-full text-center lg:p-10 max-auto">
             <div className="justify-center w-full mx-auto">
-              <p className="mt-8 text-5xl font-medium tracking-tighter text-black">
-                TDP Reports
+              <p className=" text-7xl font-medium tracking-tighter text-red-400">
+                Project Reports
               </p>
-              <p className="max-w-xl mx-auto mt-4 text-lg tracking-tight text-gray-600">
-              "Your Projects, Our Passion - TDP Excellence."
+              <p className="max-w-xl mx-auto mt-4 font-bold text-xl tracking-tight text-gray-900">
+              "Your Projects, Our Passion - THE Excellence."
               </p>
             </div>
             <div className="flex flex-col items-center justify-center max-w-xl gap-3 mx-auto mt-10 lg:flex-row">
-              <a
-                href="#_"
-                className="items-center justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-black border-2 border-black rounded-full inline-flex hover:bg-transparent hover:border-black hover:text-black focus:outline-none lg:w-auto focus-visible:outline-black text-sm focus-visible:ring-black"
+              <Link
+                to ="/new"
+                className="items-center justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-black border 2 border-black rounded-full inline-flex hover:bg-transparent hover:border-black hover:text-black focus:outline-none lg:w-auto focus-visible:outline-black text-sm focus-visible:ring-black"
               >
                 Let's Start
-              </a>
+              </Link>
               <a
                 href="#_"
                 className="inline-flex items-center justify-center text-sm font-semibold text-black duration-200 hover:text-blue-500 focus:outline-none focus-visible:outline-gray-600"
