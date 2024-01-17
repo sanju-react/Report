@@ -1,70 +1,113 @@
-import React, { useState } from 'react'
-import Form from './Form'
-import img from '../resourse/img.jpg'
+import React, { useState } from "react";
+import Form from "./Form";
+import img from "../resourse/img.jpg";
 
 const forms = [
   {
-    names:'email',
-    type:'email',
-    label:'Email',
-    placeholder:'Enter Email',
-    required:true,
-    value:'email@gmail.com',
-    validation:/\S+@\S+\.\S+/,
-    validationMessage:'Please Enter Valid email'
+    names: "email",
+    type: "email",
+    label: "Email",
+    placeholder: "Enter Email",
+    required: true,
+    value: "email@gmail.com",
+    validation: /\S+@\S+\.\S+/,
+    validationMessage: "Please Enter Valid email",
   },
   {
-    names:'password',
-    type:'password',
-    label:'Password',
-    placeholder:'Enter Password',
-    required:true,
-    value:'',
-    validation:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-    validationMessage:'Please enter atleast one uppercase, one lowercase, one number, one special character and length should be 8 or more'
-  }
-]
+    names: "password",
+    type: "password",
+    label: "Password",
+    placeholder: "Enter Password",
+    required: true,
+    value: "",
+    validation:
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+    validationMessage:
+      "Please enter atleast one uppercase, one lowercase, one number, one special character and length should be 8 or more",
+  },
+];
 const Home = () => {
-  const [age,setAge] = useState()
-  const setInput = ({target}) => {
-    setAge(target.value.replace(/[^0-9]/g, ''))
-
-  }
+  const [age, setAge] = useState();
+  const setInput = ({ target }) => {
+    setAge(target.value.replace(/[^0-9]/g, ""));
+  };
   return (
-    <>
-    <div>
-    <section className=" h-screen w-screen   bg-indigo-100" >
-	<div className="container grid gap-6 mx-auto text-center lg:grid-cols-2 xl:grid-cols-5">
-  <div className="w-full flex justify-center items-center  px-6 py-16 rounded-md sm:px-12 md:px-16 xl:col-span-2">
-		
-    <div className="w-full  px-6 py-16 rounded-md sm:px-12 md:px-16 xl:col-span-2">
-			<span className="block mb-2 ">Project Management system</span>
-			<h1 className="text-4xl font-extrabold ">"Your Projects, Our Passion - TDP Excellence."</h1>
-			<p className="my-8">
-				<span className="font-medium ">TDP. {''}</span>we understand that effective project management is the cornerstone of success in today's dynamic business landscape.
-			</p>
-			<form novalidate="" action="" className="self-stretch space-y-3">
-				<div>
-					<label for="name" className="text-sm sr-only">Your name</label>
-					<input id="name" type="text" placeholder="Your name" className="w-full p-2 rounded-md focus:ring focus:ri border solid"/>
-				</div><br/>
-				<div>
-					<label for="lastname" className="text-sm sr-only">Email address</label>
-					<input id="lastname" type="text" placeholder="Email address" className="w-full mb-2  p-2 rounded-md focus:ring focus:ri "/>
-				</div>
-        <button className='bg-blue-400 text-white hover:bg-blue-500 rounded-lg p-2 mt-32'>We Are Here</button>
-				{/* <button type="button" className="w-full py-2 font-semibold rounded dark:bg-violet-400 dark:text-gray-900">Join the waitlist</button> */}
-			</form>
-		</div>
-    </div>
-    
-		<img src={img} alt="" className="object-cover w-screen h-screen rounded-md xl:col-span-3 "/>
-	</div>
-</section>
-    </div>
-    
-    </>
-  )
-}
+    <div
+      className="bg-blue-500 bg-cover bg-center h-screen flex justify-center items-center "
+      style={{
+        backgroundImage: `url(${img})`,
+        backdropFilter: `blur(8px)`
+      }}
+    >
+      <section>
+        <div class="items-center px-8 py-12 mx-auto max-w-7xl lg:px-16 md:px-12 lg:py-24">
+          <div class="justify-center w-full text-center lg:p-10 max-auto">
+            <div class="justify-center w-full mx-auto">
+              <p class="mt-8 text-5xl font-medium tracking-tighter text-black">
+                TDP Reports
+              </p>
+              <p class="max-w-xl mx-auto mt-4 text-lg tracking-tight text-gray-600">
+              "Your Projects, Our Passion - TDP Excellence."
+              </p>
+            </div>
+            <div class="flex flex-col items-center justify-center max-w-xl gap-3 mx-auto mt-10 lg:flex-row">
+              <a
+                href="#_"
+                class="items-center justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-black border-2 border-black rounded-full inline-flex hover:bg-transparent hover:border-black hover:text-black focus:outline-none lg:w-auto focus-visible:outline-black text-sm focus-visible:ring-black"
+              >
+                Let's Start
+              </a>
+              <a
+                href="#_"
+                class="inline-flex items-center justify-center text-sm font-semibold text-black duration-200 hover:text-blue-500 focus:outline-none focus-visible:outline-gray-600"
+              >
+                Learn more &nbsp; →
+              </a>
+            </div>
+          </div>
 
-export default Home
+          <div class="flex justify-center gap-6 mt-6">
+            <a class="p-1 -m-1 group" aria-label="Follow on Twitter" href="#_">
+              <ion-icon
+                class="w-6 h-6 transition fill-black hover:text-blue-500 md hydrated"
+                name="logo-twitter"
+                role="img"
+                aria-label="logo twitter"
+              ></ion-icon>
+            </a>
+            <a
+              class="p-1 -m-1 group"
+              aria-label="Follow on Instagram"
+              href="#_"
+            >
+              <ion-icon
+                class="w-6 h-6 transition fill-black hover:text-blue-500 md hydrated"
+                name="logo-instagram"
+                role="img"
+                aria-label="logo instagram"
+              ></ion-icon>
+            </a>
+            <a class="p-1 -m-1 group" aria-label="Follow on GitHub" href="#_">
+              <ion-icon
+                class="w-6 h-6 transition fill-black hover:text-blue-500 md hydrated"
+                name="logo-github"
+                role="img"
+                aria-label="logo github"
+              ></ion-icon>
+            </a>
+            <a class="p-1 -m-1 group" aria-label="Follow on LinkedIn" href="#_">
+              <ion-icon
+                class="w-6 h-6 transition fill-black hover:text-blue-500 md hydrated"
+                name="logo-linkedin"
+                role="img"
+                aria-label="logo linkedin"
+              ></ion-icon>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Home;
