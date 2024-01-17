@@ -505,8 +505,8 @@ const WriteNew = () => {
       </div>
       <div className="md:w-1/2 w-full p-5 shadow-lg rounded-xl  border-2">
         <h1 className="text-center text-xl font-bold mb-5">Daily Reports</h1>
-        {(completeTask[0].text !== "" ||
-          pendingTask[0].text !== "" ||
+        {(completeTask[0]?.text !== "" ||
+          pendingTask[0]?.text !== "" ||
           comment !== "") && (
           <>
             <div className="text-xl font-semibold text-left">Hi, {msg()}</div>
@@ -568,8 +568,8 @@ const WriteNew = () => {
             </div>
           </>
         )}
-        {completeTask[0].text === "" &&
-          pendingTask[0].text === "" &&
+        {completeTask[0]?.text === "" &&
+          pendingTask[0]?.text === "" &&
           comment === "" && (
             <span className="h-full w-full flex justify-center items-center">
               No Report!
