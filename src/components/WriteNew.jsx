@@ -6,7 +6,6 @@ import { PDFViewer } from "@react-pdf/renderer";
 import PrintDocument from "./PrintDocument.js";
 import msg from "../utils/greeting.js";
 
-
 const WriteNew = () => {
   var completeText = "";
   var pendingText = "";
@@ -506,8 +505,8 @@ const WriteNew = () => {
       </div>
       <div className="md:w-1/2 w-full p-5 shadow-lg rounded-xl  border-2">
         <h1 className="text-center text-xl font-bold mb-5">Daily Reports</h1>
-        {(completeTask[0].text !== "" ||
-          pendingTask[0].text !== "" ||
+        {(completeTask[0]?.text !== "" ||
+          pendingTask[0]?.text !== "" ||
           comment !== "") && (
           <>
             <div className="text-xl font-semibold text-left">Hi, {msg()}</div>
@@ -560,18 +559,20 @@ const WriteNew = () => {
             </div>
 
             <div className="text-xl font-semibold text-left my-2">
-            {comment ? "Comment as below:" : ""}
+              {comment ? "Comment as below:" : ""}
             </div>
             <div className="mt-3">
               <p className="text-xl text-left decoration-list">{comment}</p>
             </div>
           </>
         )}
-        {
-          (completeTask[0].text === "" &&
-          pendingTask[0].text === "" &&
-          comment === "") && <span className="h-full w-full flex justify-center items-center">No Report!</span>
-        }
+        {completeTask[0]?.text === "" &&
+          pendingTask[0]?.text === "" &&
+          comment === "" && (
+            <span className="h-full w-full flex justify-center items-center">
+              No Report!
+            </span>
+          )}
       </div>
     </div>
   );
