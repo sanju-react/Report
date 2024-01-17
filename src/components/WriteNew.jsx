@@ -6,7 +6,6 @@ import { PDFViewer } from "@react-pdf/renderer";
 import PrintDocument from "./PrintDocument.js";
 import msg from "../utils/greeting.js";
 
-
 const WriteNew = () => {
   var completeText = "";
   var pendingText = "";
@@ -525,15 +524,15 @@ const WriteNew = () => {
               {completeText}
             </div>
 
-            <div className="mt-3">
+            <div className="mt-3 ">
               {completeTask.map(
                 (ct, i) =>
                   ct.text !== "" && (
-                    <div className="flex" key={i}>
-                      <li className="text-xl text-left decoration-list">
+                    <ol className="mx-3" data-copy-list>
+                      <li className="text-xl text-left">
                         {ct.text}
                       </li>
-                    </div>
+                    </ol>
                   )
               )}
             </div>
@@ -547,31 +546,35 @@ const WriteNew = () => {
             </div>
 
             <div className="mt-3">
-              {pendingTask.map(
-                (ct, i) =>
-                  ct.text !== "" && (
-                    <div className="flex" key={i}>
-                      <li className="text-xl text-left decoration-list">
-                        {ct.text}
-                      </li>
-                    </div>
-                  )
-              )}
+              <ol className="mx-3">
+                {pendingTask.map(
+                  (ct, i) =>
+                    ct.text !== "" && (
+                      <div className="flex" key={i} >
+                        <li className="text-xl text-left decoration-none list-none">
+                          {ct.text}
+                        </li>
+                      </div>
+                    )
+                )}
+              </ol>
             </div>
 
             <div className="text-xl font-semibold text-left my-2">
-            {comment ? "Comment as below:" : ""}
+              {comment ? "Comment as below:" : ""}
             </div>
             <div className="mt-3">
               <p className="text-xl text-left decoration-list">{comment}</p>
             </div>
           </>
         )}
-        {
-          (completeTask[0].text === "" &&
+        {completeTask[0].text === "" &&
           pendingTask[0].text === "" &&
-          comment === "") && <span className="h-full w-full flex justify-center items-center">No Report!</span>
-        }
+          comment === "" && (
+            <span className="h-full w-full flex justify-center items-center">
+              No Report!
+            </span>
+          )}
       </div>
     </div>
   );
