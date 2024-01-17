@@ -172,6 +172,7 @@ const TaskAssign = () => {
   const pauseTimer = (i, val, projI) => {
     let task = [...taskArr];
     task[projI]["tasks"][i]["timer"] = val;
+    task[projI]["tasks"][i]["lastUpdated"] = "";
     setTaskArr(task);
     localStorage.setItem("tasks", JSON.stringify(task));
     setActiveTask({ ...activeTask, isRunning: false });
@@ -453,7 +454,9 @@ const TaskAssign = () => {
               <option>--Select Project--</option>
               {JSON.parse(localStorage.getItem("projects") || "[]").map(
                 (opt, i) => (
-                  <option name={opt.title}>{opt.title}</option>
+                  <option key={i} name={opt.title}>
+                    {opt.title}
+                  </option>
                 )
               )}
             </select>
