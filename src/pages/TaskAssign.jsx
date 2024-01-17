@@ -453,7 +453,7 @@ const TaskAssign = () => {
               <option>--Select Project--</option>
               {JSON.parse(localStorage.getItem("projects") || "[]").map(
                 (opt, i) => (
-                  <option name={opt.title}>{opt.title}</option>
+                  <option key={i} name={opt.title}>{opt.title}</option>
                 )
               )}
             </select>
