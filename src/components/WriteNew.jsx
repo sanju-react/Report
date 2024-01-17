@@ -226,7 +226,7 @@ const WriteNew = () => {
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-x-lg text-white "
+              className="bi bi-x-lg text-white "
               viewBox="0 0 16 16"
             >
               <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
@@ -237,7 +237,7 @@ const WriteNew = () => {
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-printer-fill "
+              className="bi bi-printer-fill "
               viewBox="0 0 16 16"
             >
               <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1" />
@@ -270,7 +270,7 @@ const WriteNew = () => {
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-database-down"
+              className="bi bi-database-down"
               viewBox="0 0 16 16"
             >
               <path d="M12.5 9a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7m.354 5.854 1.5-1.5a.5.5 0 0 0-.708-.708l-.646.647V10.5a.5.5 0 0 0-1 0v2.793l-.646-.647a.5.5 0 0 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0" />
@@ -478,7 +478,7 @@ const WriteNew = () => {
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-envelope-plus-fill"
+              className="bi bi-envelope-plus-fill"
               viewBox="0 0 16 16"
             >
               <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.026A2 2 0 0 0 2 14h6.256A4.5 4.5 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586zM16 4.697v4.974A4.5 4.5 0 0 0 12.5 8a4.5 4.5 0 0 0-1.965.45l-.338-.207z" />
@@ -495,7 +495,7 @@ const WriteNew = () => {
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-trash2"
+              className="bi bi-trash2"
               viewBox="0 0 16 16"
             >
               <path d="M14 3a.7.7 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225A.7.7 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2M3.215 4.207l1.493 8.957a1 1 0 0 0 .986.836h4.612a1 1 0 0 0 .986-.836l1.493-8.957C11.69 4.689 9.954 5 8 5s-3.69-.311-4.785-.793" />
@@ -524,15 +524,15 @@ const WriteNew = () => {
               {completeText}
             </div>
 
-            <div className="mt-3">
+            <div className="mt-3 ">
               {completeTask.map(
                 (ct, i) =>
                   ct.text !== "" && (
-                    <div className="flex" key={i}>
-                      <li className="text-xl text-left decoration-list">
+                    <ol className="mx-3" data-copy-list>
+                      <li className="text-xl text-left">
                         {ct.text}
                       </li>
-                    </div>
+                    </ol>
                   )
               )}
             </div>
@@ -546,16 +546,18 @@ const WriteNew = () => {
             </div>
 
             <div className="mt-3">
-              {pendingTask.map(
-                (ct, i) =>
-                  ct.text !== "" && (
-                    <div className="flex" key={i}>
-                      <li className="text-xl text-left decoration-list">
-                        {ct.text}
-                      </li>
-                    </div>
-                  )
-              )}
+              <ol className="mx-3">
+                {pendingTask.map(
+                  (ct, i) =>
+                    ct.text !== "" && (
+                      <div className="flex" key={i} >
+                        <li className="text-xl text-left decoration-none list-none">
+                          {ct.text}
+                        </li>
+                      </div>
+                    )
+                )}
+              </ol>
             </div>
 
             <div className="text-xl font-semibold text-left my-2">
