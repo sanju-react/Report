@@ -169,38 +169,45 @@ const WriteNew = () => {
 
   const getCompletedTask = () => {
     let tasks = JSON.parse(localStorage.getItem("tasks"));
-    // console.log(tasks);
-    let completedTaskArray = tasks
-      .map((val) =>
-        val["tasks"].map(
-          (val) => val["lastUpdated"] == getCurrentDate() && val["title"]
-        )
-      )
-      .flat();
-    let cArray = [];
-    completedTaskArray.map((val, i) => {
-      if (!!val) {
-        cArray.push({ id: i + 1, text: val, photo: "" });
-      }
-    });
-    setCompleteTask(cArray);
 
-    // for pending task
-    let pendingTaskArray = tasks
-      .map((val) =>
-        val["tasks"].map(
-          (val) => val["lastUpdated"] !== getCurrentDate() && val["title"]
+    if (tasks) {
+      let completedTaskArray = tasks
+        .map((val) =>
+          val["tasks"].map(
+            (val) => val["lastUpdated"] == getCurrentDate() && val["title"]
+          )
         )
-      )
-      .flat();
-    let pArray = [];
-    pendingTaskArray.map((val, i) => {
-      if (!!val) {
-        pArray.push({ id: i + 1, text: val, photo: "" });
-      }
-    });
-    setPendingTask(pArray);
-    // console.log(completeTask);
+        .flat();
+      let cArray = [];
+      // console.log(completedTaskArray);
+      completedTaskArray.map((val, i) => {
+        if (!!val) {
+          cArray.push({ id: i + 1, text: val, photo: "" });
+        }
+      });
+      setCompleteTask(cArray);
+
+      // for pending task
+      let pendingTaskArray = tasks
+        .map((val) =>
+          val["tasks"].map(
+            (val) => val["lastUpdated"] !== getCurrentDate() && val["title"]
+          )
+        )
+        .flat();
+      // console.log(pendingTaskArray);
+      let pArray = [];
+      pendingTaskArray.map((val, i) => {
+        if (!!val) {
+          pArray.push({ id: i + 1, text: val, photo: "" });
+        }
+      });
+      setPendingTask(pArray);
+      // console.log("Complete Task:"+cArray);
+      // console.log("Pending Task:"+pArray);
+    } else {
+      alert("No Tasks Available!");
+    }
   };
 
   return (
@@ -520,7 +527,6 @@ const WriteNew = () => {
                   completeText = "Complete Task :-";
                 }
               })}
-
               {completeText}
             </div>
 
@@ -529,7 +535,7 @@ const WriteNew = () => {
                 (ct, i) =>
                   ct.text !== "" && (
                     <ol className="mx-3" data-copy-list>
-                      <li className="text-xl text-left">
+                      <li key={i} className="text-xl text-left">
                         {ct.text}
                       </li>
                     </ol>
@@ -550,7 +556,7 @@ const WriteNew = () => {
                 {pendingTask.map(
                   (ct, i) =>
                     ct.text !== "" && (
-                      <div className="flex" key={i} >
+                      <div className="flex" key={i}>
                         <li className="text-xl text-left decoration-none list-none">
                           {ct.text}
                         </li>
