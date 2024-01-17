@@ -1,7 +1,7 @@
 {
   "projects": {
     "default": "tdp-reports-c4ee8",
-    "staging": "g-campus"
+    "staging": "tdp-reports-c4ee8"
   },
   "targets": {},
   "etags": {}
