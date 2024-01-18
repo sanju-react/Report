@@ -531,16 +531,21 @@ const WriteNew = () => {
             </div>
 
             <div className="mt-3 ">
+            <ol className="mx-3">
+            
               {completeTask.map(
                 (ct, i) =>
                   ct.text !== "" && (
-                    <ol className="mx-3" data-copy-list>
-                      <li key={i} className="text-xl text-left">
+                      <li key={i} className="text-xl text-left decoration-none list-decimal">
+
                         {ct.text}
+                        <span className="font-bold">{`\t [Done]`}</span>
                       </li>
-                    </ol>
+                    
+                    
                   )
               )}
+              </ol>
             </div>
             <div className="text-xl font-semibold text-left my-2">
               {pendingTask.map((ct) => {
@@ -552,12 +557,12 @@ const WriteNew = () => {
             </div>
 
             <div className="mt-3">
-              <ol className="mx-3">
+              <ol className="ml-20">
                 {pendingTask.map(
                   (ct, i) =>
                     ct.text !== "" && (
                       <div className="flex" key={i}>
-                        <li className="text-xl text-left decoration-none list-none">
+                        <li className="text-xl text-left decoration-none list-decimal">
                           {ct.text}
                         </li>
                       </div>
