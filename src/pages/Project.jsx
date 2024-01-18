@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 const ProjectAssign = () => {
   const [assignProject, setAssignProject] = useState({});
   const [projectArr, setProjectArr] = useState([]);
+  const [taskArr, setTaskArr] = useState([]);
   const [addProject, setAddProject] = useState("");
   const [index, setIndex] = useState();
 
@@ -11,7 +12,11 @@ const ProjectAssign = () => {
     if (localStorage.getItem("projects") !== null) {
       setProjectArr(JSON.parse(localStorage.getItem("projects")));
     }
+    if (localStorage.getItem("tasks") !== null) {
+      setTaskArr(JSON.parse(localStorage.getItem("tasks")));
+    }
   }, []);
+  console.log(taskArr.map(val =>  val.project == ['Project-1'] ? val.tasks.length : 0));
 
   const addRow = () => {
     // let project = JSON.parse(localStorage.getItem('projects') || '[]')
