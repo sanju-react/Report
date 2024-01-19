@@ -39,6 +39,7 @@ const Header = () => {
           if (header.title === "Home") {
             return (
               <Link
+                key={i}
                 to={header.link}
                 onClick={() => {
                   setSideMenu(!sideMenu);
@@ -51,6 +52,7 @@ const Header = () => {
             // Added 'return' here
             return (
               <Link
+                key={i}
                 to={header.link}
                 onClick={() => {
                   setSideMenu(!sideMenu);
@@ -82,6 +84,7 @@ const Header = () => {
             if (header.title !== "Home") {
               return (
                 <Link
+                  key={i}
                   to={header.link}
                   onClick={() => {
                     setSideMenu(!sideMenu);
