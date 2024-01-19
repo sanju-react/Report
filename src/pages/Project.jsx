@@ -16,7 +16,13 @@ const ProjectAssign = () => {
       setTaskArr(JSON.parse(localStorage.getItem("tasks")));
     }
   }, []);
-  console.log(taskArr.map(val =>  val.project == ['Project-1'] ? val.tasks.length : 0));
+
+  const getTasksCount = (project_name) => {
+    const count = taskArr.map(
+      (val) => val.project === project_name && val.tasks.length
+    );
+    return count;
+  };
 
   const addRow = () => {
     // let project = JSON.parse(localStorage.getItem('projects') || '[]')
@@ -81,10 +87,6 @@ const ProjectAssign = () => {
     // Your cleanup or warning logic here
     alert("Do you really want to leave this page?");
   };
-
-  // useEffect(() => {
-  //   console.log(addProject);
-  // }, [addProject, showModal]);
 
   return (
     <>
@@ -166,15 +168,15 @@ const ProjectAssign = () => {
                     {val.title}
                   </td>
                   <td className="px-6 text-center py-4 whitespace-nowrap">
-                    {val.assignedProject}
+                    {getTasksCount(val.title) && getTasksCount(val.title)}
                   </td>
                   <td className="px-6 text-center py-4 whitespace-nowrap">
                     <span
-                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-${
-                        val.status === "active" ? "green" : "red"
-                      }-100 text-${
-                        val.status === "active" ? "green" : "red"
-                      }-800`}
+                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                        val.status === "active"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-red-100 text-red-800"
+                      }`}
                     >
                       {val.status}
                     </span>

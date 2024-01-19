@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 const TaskAssign = () => {
   const [assignTask, setAssignTask] = useState({});
   const [taskArr, setTaskArr] = useState([]);
+  const [projectArr, setProjectArr] = useState([]);
   const [addTask, setAddTask] = useState("");
   const [error, setError] = useState("");
   const [index, setIndex] = useState();
@@ -37,12 +38,21 @@ const TaskAssign = () => {
     }
   }, []);
 
+  const setProjectStatus = (project_name, status = "active") => {
+    const projectArray = JSON.parse(localStorage.getItem("projects")) || [];
+    projectArray?.map(
+      (val, i) =>
+        val.title === project_name && (projectArray[i].status = status)
+    );
+
+    localStorage.setItem("projects", JSON.stringify(projectArray));
+  };
+
   const addRow = () => {
     // let task = JSON.parse(localStorage.getItem('tasks') || '[]')
     let task = [...taskArr];
     let obj = { ...assignTask },
       taskPushed = false;
-
     obj["date"] = new Date().toLocaleDateString();
     obj["id"] = new Date().getTime();
     obj["timer"] = "start";
@@ -129,7 +139,7 @@ const TaskAssign = () => {
     if (JSON.stringify(tasks).includes("stop") === false) {
       tasks[projI]["tasks"][i]["timer"] = val;
       tasks[projI]["tasks"][i]["lastUpdated"] = "";
-
+      setProjectStatus(tasks[projI].project)
       setActiveTask({
         id: tasks[projI]["tasks"][i]["id"],
         isRunning: true,
@@ -181,27 +191,60 @@ const TaskAssign = () => {
     let task = [...taskArr];
     task[projI]["tasks"][i]["timer"] = val;
     task[projI]["tasks"][i]["lastUpdated"] = "";
+    setProjectStatus(task[projI].project,"inactive")
     setTaskArr(task);
     localStorage.setItem("tasks", JSON.stringify(task));
     setActiveTask({ ...activeTask, isRunning: false });
   };
 
-  const stopTimer = (i, val, projI) => {
-    let task = [...taskArr];
-    task[projI]["tasks"][i]["timer"] = val;
-    task[projI]["tasks"][i]["lastUpdated"] = getCurrentDate();
+  // const stopTimer = (i, val, projI) => {
+  //   let task = [...taskArr];
+  //   task[projI]["tasks"][i]["timer"] = val;
+  //   task[projI]["tasks"][i]["lastUpdated"] = getCurrentDate();
+  //   setProjectStatus(task[projI].project,"inactive")
 
-    setTaskArr(task);
-    localStorage.setItem("tasks", JSON.stringify(task));
-    let taskIndex;
-    task.forEach((task) => {
-      taskIndex = task.tasks.findIndex((v) => v.id === activeTask.id);
-    });
-    const updatedTasks = [...task];
-    // updatedTasks[taskIndex].isRunning = false;
+  //   setTaskArr(task);
+  //   localStorage.setItem("tasks", JSON.stringify(task));
+  //   let taskIndex;
+  //   task.forEach((task) => {
+  //     taskIndex = task.tasks.findIndex((v) => v.id === activeTask.id);
+  //   });
+  //   const updatedTasks = [...task];
+  //   updatedTasks[taskIndex].isRunning = false;
+  //   setTaskArr(updatedTasks);
+  //   setActiveTask(null);
+  // };
+
+  const stopTimer = (i, val, projI) => {
+    const updatedTasks = [...taskArr];
+  
+    // Update the timer and lastUpdated properties
+    updatedTasks[projI].tasks[i] = {
+      ...updatedTasks[projI].tasks[i],
+      timer: val,
+      lastUpdated: getCurrentDate(),
+    };
+  
+    // Set project status to "inactive"
+    setProjectStatus(updatedTasks[projI].project, "inactive");
+  
+    // Update the task array and store it in localStorage
+    setTaskArr(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  
+    // Find the index of the active task and update its status
+    if (activeTask && activeTask.id) {
+      const taskIndex = updatedTasks[projI].tasks.findIndex((v) => v.id === activeTask.id);
+      if (taskIndex !== -1) {
+        updatedTasks[projI].tasks[taskIndex].isRunning = false;
+      }
+    }
+  
+    // Set the updated tasks and clear the active task
     setTaskArr(updatedTasks);
     setActiveTask(null);
   };
+  
 
   useEffect(() => {
     // Add the event listener when the component mounts
@@ -533,14 +576,14 @@ const TaskAssign = () => {
             
           >
             Reset
-          </button> {''}
+          </button>{" "}
+          {""}
           <button
             className="bg-green-900 rounded-lg text-white py-2 px-4"
             onClick={handleOk}
           >
             Submit
           </button>
-          
         </div>
         </form>
       </Modal>

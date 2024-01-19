@@ -531,20 +531,18 @@ const WriteNew = () => {
             </div>
 
             <div className="mt-3 ">
+
             <ol className="ml-16">
             
               {completeTask.map(
                 (ct, i) =>
                   ct.text !== "" && (
                       <li key={i} className="text-xl text-left decoration-none list-decimal">
-
                         {ct.text}
                         <span className="font-bold">{`\t [Done]`}</span>
                       </li>
-                    
-                    
-                  )
-              )}
+                    )
+                )}
               </ol>
             </div>
             <div className="text-xl font-semibold text-left my-2">
