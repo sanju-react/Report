@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../resourse/LOGO.png";
 
@@ -27,6 +27,24 @@ const Header = () => {
       link: "/project",
     },
   ];
+  useEffect(() => {
+    const close = (event) => {
+      if (event.key === 'Escape') { 
+        setSideMenu(false);
+      }
+    };
+  
+    
+    if (sideMenu) {
+      window.addEventListener('keydown', close);
+    }
+  
+    return () => {
+      
+      window.removeEventListener('keydown', close);
+    };
+  }, [sideMenu]); 
+  
 
   return (
     <>
@@ -34,12 +52,15 @@ const Header = () => {
         className={`  fixed ${
           sideMenu ? "flex" : "hidden"
         } md:hidden z-30 items-center gap-5 flex-col  p-6  left-0 top-0 h-screen  w-1/2 bg-gray-100`}
+        
       >
-        {headers?.map((header, i) => {
-          if (header.title === "Home") {
+        {headers?.map((header,i)  => {
+          if  (header.title === "Home") {
             return (
               <Link
+
                 key={i}
+
                 to={header.link}
                 onClick={() => {
                   setSideMenu(!sideMenu);
