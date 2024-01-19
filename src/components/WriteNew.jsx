@@ -230,8 +230,8 @@ const WriteNew = () => {
           {isPrint ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
+              width="20"
+              height="20"
               fill="currentColor"
               className="bi bi-x-lg text-white "
               viewBox="0 0 16 16"
@@ -241,10 +241,10 @@ const WriteNew = () => {
           ) : (
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
+              width="25"
+              height="25"
               fill="currentColor"
-              className="bi bi-printer-fill "
+              className="bi bi-printer-fill hover:scale-125 "
               viewBox="0 0 16 16"
             >
               <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1" />
@@ -531,14 +531,13 @@ const WriteNew = () => {
             </div>
 
             <div className="mt-3 ">
-              <ol className="mx-3">
-                {completeTask.map(
-                  (ct, i) =>
-                    ct.text !== "" && (
-                      <li
-                        key={i}
-                        className="text-xl text-left decoration-none list-decimal"
-                      >
+
+            <ol className="ml-16">
+            
+              {completeTask.map(
+                (ct, i) =>
+                  ct.text !== "" && (
+                      <li key={i} className="text-xl text-left decoration-none list-decimal">
                         {ct.text}
                         <span className="font-bold">{`\t [Done]`}</span>
                       </li>
@@ -556,7 +555,7 @@ const WriteNew = () => {
             </div>
 
             <div className="mt-3">
-              <ol className="ml-20">
+              <ol className="ml-16">
                 {pendingTask.map(
                   (ct, i) =>
                     ct.text !== "" && (

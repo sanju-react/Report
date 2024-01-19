@@ -110,6 +110,14 @@ const TaskAssign = () => {
     setAddProjectModel(false);
     setAssignProject({});
   };
+  const clearAll = () =>{
+    setAssignTask("")
+    
+    
+    
+
+  };
+
   const handleOk = () => {
     addRow();
     // console.log("submit");
@@ -323,15 +331,16 @@ const TaskAssign = () => {
               <h2 className="text-left font-bold underline underline-offset-2">
                 Project:- {ts.project}
               </h2>
+              
               <table className="w-full my-5">
-                <thead>
+                <thead className="">
                   <tr className="bg-gray-300">
-                    <th className="py-5">Assign Date</th>
-                    <th className="py-5">Task</th>
-                    <th className="py-5">Priority</th>
-                    <th className="py-5">Status</th>
-                    <th className="py-5">Total Time</th>
-                    <th className="flex gap-x-3 items-center py-5">Action</th>
+                    <th className="py-3">Assign Date</th>
+                    <th className="py-3">Task</th>
+                    <th className="py-3">Priority</th>
+                    <th className="py-3">Status</th>
+                    <th className="py-3">Total Time</th>
+                    <th className="flex gap-x-3 items-center py-3">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -346,7 +355,7 @@ const TaskAssign = () => {
                             name="priority"
                             onChange={(e) => changePriority(i, e)}
                             value={!!v.priority ? v.priority : "Not Selected"}
-                            className="py-3 border-b-2 border-gray-500"
+                            className="py-2 rounded-xl border 2 border-gray-500"
                           >
                             <option value="Not Selected">--Priority--</option>
                             <option name="High">High</option>
@@ -454,7 +463,8 @@ const TaskAssign = () => {
                     ))}
                 </tbody>
               </table>
-            </div>
+              </div>
+           
           ))}
       </div>
       <Modal
@@ -465,6 +475,7 @@ const TaskAssign = () => {
         onCancel={handleCancel}
         cancelButtonProps={{ classNames: "bg-red-700 text-white py-2 px-4" }}
       >
+        <form>
         <div className="flex flex-col my-4">
           <input
             placeholder="Task Title"
@@ -480,6 +491,7 @@ const TaskAssign = () => {
             name="desc"
             onChange={(e) => enterTaskDetails(e)}
             className="border border-gray-300 my-3 p-1"
+            required
           />
           <div className="w-full flex items-center gap-x-4 my-4">
             <h3>Project: </h3>
@@ -491,7 +503,7 @@ const TaskAssign = () => {
               name="project"
               onChange={(e) => enterTaskDetails(e)}
               placeholder="--Select Project--"
-              className="bg-gray-300 py-3 border-b-2 border-gray-500 w-40"
+              className="bg-gray-300 rounded-lg py-2 border-b-2 border-gray-500 w-40"
               required
             >
               <option>--Select Project--</option>
@@ -547,7 +559,7 @@ const TaskAssign = () => {
               name="priority"
               onChange={(e) => enterTaskDetails(e)}
               placeholder="--Select Priority--"
-              className="bg-gray-300 py-3 border-b-2 border-gray-500"
+              className="bg-gray-300 rounded-lg py-2 border-b-2 border-gray-500"
             >
               <option></option>
               <option name="High">High</option>
@@ -557,9 +569,11 @@ const TaskAssign = () => {
           </div>
         </div>
         <div className="w-full gap-4  flex justify-end">
-          <button
+        <button
+        type = "reset"
             className="bg-red-600 rounded-lg text-white py-2 px-4"
-            onClick={handleOk}
+            onClick={clearAll}
+            
           >
             Reset
           </button>{" "}
@@ -571,6 +585,7 @@ const TaskAssign = () => {
             Submit
           </button>
         </div>
+        </form>
       </Modal>
     </>
   );

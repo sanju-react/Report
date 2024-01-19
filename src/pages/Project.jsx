@@ -135,8 +135,8 @@ const ProjectAssign = () => {
         </div>
       </Modal>
 
-      <div className="h-screen w-full px-10">
-        <table className="min-w-full  divide-gray-200 ">
+      <div className="h-screen  overflow-scroll    px-10">
+        <table className="min-w-full   divide-gray-200  ">
           <thead>
             <tr className="">
               <th className="px-6 text-center py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
