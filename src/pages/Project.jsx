@@ -25,7 +25,6 @@ const ProjectAssign = () => {
   };
 
   const addRow = () => {
-    // let project = JSON.parse(localStorage.getItem('projects') || '[]')
     let project = [...projectArr];
     let obj = { ...assignProject };
     obj["date"] = new Date().toLocaleDateString();
@@ -34,43 +33,38 @@ const ProjectAssign = () => {
     obj["time"] = "00:00:00";
     obj["status"] = "inactive";
     project.push(obj);
-    project.shift();
     setProjectArr(project);
     localStorage.setItem("projects", JSON.stringify(project));
     setAssignProject({});
   };
-  const editRow = () => {
-    let project = [...projectArr];
-    project[index] = assignProject;
-    setProjectArr(project);
-    localStorage.setItem("projects", JSON.stringify(project));
-    setAssignProject({});
-  };
+  // const editRow = () => {
+  //   let project = [...projectArr];
+  //   project[index] = assignProject;
+  //   setProjectArr(project);
+  //   localStorage.setItem("projects", JSON.stringify(project));
+  //   setAssignProject({});
+  // };
 
   const enterProjectDetails = ({ target }) => {
     let obj = { ...assignProject };
     obj[target.name] = target.value;
     setAssignProject(obj);
   };
+
   const showModal = (bool) => {
     let project = [...projectArr];
-    if (bool) {
-      project.unshift({});
-    } else {
-      project.shift();
-    }
     setProjectArr(project);
     setAssignProject({});
     setAddProject(bool);
   };
-  const handleOk = () => {
+
+  const handleOk = (e) => {
+    e.preventDefault()
+    showModal();
     addRow();
-    // showModal("");
-    // console.log("submit");
   };
   const handleCancel = () => {
-    console.log("cancel");
-    showModal("");
+    showModal();
   };
 
   useEffect(() => {
@@ -92,7 +86,7 @@ const ProjectAssign = () => {
     <>
       {/* {contextHolder} */}
       <button
-        className="fixed bottom-5 right-3  bg-transparent rounded mx-4 w-auto "
+        className="text-white font-semibold rounded mx-4 w-auto p-2 flex justify-center items-center gap-3 bg-blue-500"
         onClick={() => showModal(true)}
         title="Add Project"
       >
@@ -100,42 +94,47 @@ const ProjectAssign = () => {
           xmlns="http://www.w3.org/2000/svg"
           width="32"
           height="32"
-          className="bi bi-plus-circle-fill fill-blue-500"
+          className="bi bi-plus-circle-fill fill-white"
           viewBox="0 0 16 16"
         >
           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
         </svg>
+        <span>Add Project</span>
+
       </button>
       <Modal
         footer={null}
+        closeIcon={true}
+        centered={true}
         title={"Add Project"}
         open={!!addProject}
         onHide={() => showModal("")}
         onCancel={handleCancel}
         cancelButtonProps={{ classNames: "bg-red-700 text-white py-2 px-4" }}
       >
-        <div className="flex flex-col my-4">
-          <input
-            placeholder="Project Name"
-            value={assignProject.title || ""}
-            name="title"
-            onChange={(e) => enterProjectDetails(e)}
-            className="border border-gray-300 my-3 p-1"
-            required
-          />
-        </div>
-        <div className="w-full flex justify-end">
-          <button
-            type="submit"
-            className="bg-blue-500 rounded-md text-white py-2 px-4"
-            onClick={handleOk}
-          >
-            Submit
-          </button>
-        </div>
+        <form onSubmit={handleOk}>
+          <div className="flex flex-col my-4">
+            <input
+              placeholder="Project Name"
+              value={assignProject.title || ""}
+              name="title"
+              onChange={(e) => enterProjectDetails(e)}
+              className="border border-gray-300 my-3 p-1"
+              required
+            />
+          </div>
+          <div className="w-full flex justify-end">
+            <button
+              type="submit"
+              className="bg-blue-500 rounded-md text-white py-2 px-4"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
       </Modal>
 
-      <div className="h-screen  overflow-scroll    px-10">
+      <div className="h-screen  overflow-scroll   mt-5 px-10">
         <table className="min-w-full   divide-gray-200  ">
           <thead>
             <tr className="">

@@ -1,10 +1,32 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../resourse/LOGO.png";
-
 
 const Header = () => {
   const [sideMenu, setSideMenu] = useState(false);
+  const path = useLocation();
+  const headers = [
+    {
+      title: "Home",
+      link: "/",
+    },
+    {
+      title: "Report",
+      link: "/report",
+    },
+    {
+      title: "Task",
+      link: "/task",
+    },
+    {
+      title: "Preview",
+      link: "/preview",
+    },
+    {
+      title: "Project",
+      link: "/project",
+    },
+  ];
 
   return (
     <>
@@ -13,49 +35,39 @@ const Header = () => {
           sideMenu ? "flex" : "hidden"
         } md:hidden z-30 items-center gap-5 flex-col  p-6  left-0 top-0 h-screen  w-1/2 bg-gray-100`}
       >
-        <Link
-          to="/"
-          onClick={() => {
-            setSideMenu(!sideMenu);
-          }}
-        >
-          <img className="aspect-auto" src={logo} />
-        </Link>
-        <Link
-          to="/new"
-          onClick={() => {
-            setSideMenu(!sideMenu);
-          }}
-        >
-          <h1 className="hover:underline">New Report</h1>
-        </Link>
-
-        <Link
-          to="/assign"
-          onClick={() => {
-            setSideMenu(!sideMenu);
-          }}
-        >
-          <h1 className="hover:underline">Assigned Task</h1>
-        </Link>
-
-        <Link
-          to="/show"
-          onClick={() => {
-            setSideMenu(!sideMenu);
-          }}
-        >
-          <h1 className="hover:underline">Show Previous</h1>
-        </Link>
-
-        <Link
-          to="/projects"
-          onClick={() => {
-            setSideMenu(!sideMenu);
-          }}
-        >
-          <h1 className="hover:underline">Project</h1>
-        </Link>
+        {headers?.map((header, i) => {
+          if (header.title === "Home") {
+            return (
+              <Link
+                to={header.link}
+                onClick={() => {
+                  setSideMenu(!sideMenu);
+                }}
+              >
+                <img alt={header.title} className="aspect-auto" src={logo} />
+              </Link>
+            );
+          } else {
+            // Added 'return' here
+            return (
+              <Link
+                to={header.link}
+                onClick={() => {
+                  setSideMenu(!sideMenu);
+                }}
+              >
+                <h1
+                  className={`hover:text-blue-600 text-bold text-[20px] leading-[10px] ${
+                    path.pathname === header.link &&
+                    "text-blue-600 underline underline-offset-8"
+                  }  hover:underline hover:underline-offset-8 py-3`}
+                >
+                  {header.title}
+                </h1>
+              </Link>
+            );
+          }
+        })}
       </div>
 
       <div className="  flex w-full justify-between h-[10vh]  border-t-gray-300 px-5">
@@ -66,30 +78,27 @@ const Header = () => {
         </div>
 
         <div className=" md:flex hidden   justify-end items-center  h-full text-black  gap-5 w-3/4  font-thin">
-          <Link
-            to="/new"
-            className="hover:text-blue-600 text-bold text-[20px] leading-[10px]"
-          >
-            New Report
-          </Link>
-          <Link
-            to="/assign"
-            className="hover:text-blue-600 text-bold text-[20px] leading-[10px]"
-          >
-            Assigned Tasks
-          </Link>
-          <Link
-            to="/show"
-            className="hover:text-blue-600 text-bold text-[20px] leading-[10px]"
-          >
-            Show Previous
-          </Link>
-          <Link
-            to="/projects"
-            className="hover:text-blue-600 text-bold text-[20px] leading-[10px]"
-          >
-            Projects
-          </Link>
+          {headers?.map((header, i) => {
+            if (header.title !== "Home") {
+              return (
+                <Link
+                  to={header.link}
+                  onClick={() => {
+                    setSideMenu(!sideMenu);
+                  }}
+                >
+                  <h1
+                    className={`hover:text-blue-600 text-bold text-[20px] leading-[10px] ${
+                      path.pathname === header.link &&
+                      "text-blue-600 underline underline-offset-8"
+                    }  hover:underline hover:underline-offset-8`}
+                  >
+                    {header.title}
+                  </h1>
+                </Link>
+              );
+            }
+          })}{" "}
         </div>
         <div className=" md:hidden  flex  justify-end items-center  h-full text-black  gap-5 w-1/2  font-thin">
           <span

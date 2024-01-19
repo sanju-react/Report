@@ -302,22 +302,21 @@ const TaskAssign = () => {
     <>
       {contextHolder}
       <button
-        className="flex gap-x-4 my-2 items-center bg-gray-300 rounded mx-4 w-auto py-2 px-4"
+        className="text-white font-semibold rounded mx-4 w-auto p-2 flex justify-center items-center gap-3 bg-blue-500"
         onClick={() => showModal("add")}
+        title="Add Project"
       >
-        <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            fill="Green"
-            className="bi bi-plus-circle-fill"
-            viewBox="0 0 16 16"
-          >
-            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
-          </svg>
-        </span>{" "}
-        Add Task
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          className="bi bi-plus-circle-fill fill-white"
+          viewBox="0 0 16 16"
+        >
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+        </svg>
+        <span>Add Task</span>
+
       </button>
       <div className="w-full flex flex-col justify-center items-center">
         {taskArr
