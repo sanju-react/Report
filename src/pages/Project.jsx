@@ -26,6 +26,7 @@ const ProjectAssign = () => {
       obj["date"] = new Date().toLocaleDateString();
       obj["id"] = new Date().getTime();
       obj["assignedProject"] = 0;
+      obj["assignedtask"] = 0;
       obj["time"] = "00:00:00";
       obj["status"] = "inactive";
       project.push(obj);
@@ -228,6 +229,9 @@ const ProjectAssign = () => {
                           : getTasksCount(val.id) &&
                             getTasksCount(val.id)}
                       </td>
+
+                     
+
                       <td className="px-6 text-center py-4 whitespace-nowrap">
                         <span
                           className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
