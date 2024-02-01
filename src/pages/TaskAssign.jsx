@@ -36,13 +36,15 @@ const TaskAssign = () => {
     if (localStorage.getItem("tasks") !== null) {
       setTaskArr(JSON.parse(localStorage.getItem("tasks")));
     }
+    if (localStorage.getItem("projects") !== null) {
+      setProjectArr(JSON.parse(localStorage.getItem("projects")));
+    }
   }, []);
 
-  const setProjectStatus = (project_name, status = "active") => {
+  const setProjectStatus = (project_id, status = "active") => {
     const projectArray = JSON.parse(localStorage.getItem("projects")) || [];
     projectArray?.map(
-      (val, i) =>
-        val.title === project_name && (projectArray[i].status = status)
+      (val, i) => val.id == project_id && (projectArray[i].status = status)
     );
 
     localStorage.setItem("projects", JSON.stringify(projectArray));
@@ -110,12 +112,8 @@ const TaskAssign = () => {
     setAddProjectModel(false);
     setAssignProject({});
   };
-  const clearAll = () =>{
-    setAssignTask("")
-    
-    
-    
-
+  const clearAll = () => {
+    setAssignTask("");
   };
 
   const handleOk = () => {
@@ -139,7 +137,8 @@ const TaskAssign = () => {
     if (JSON.stringify(tasks).includes("stop") === false) {
       tasks[projI]["tasks"][i]["timer"] = val;
       tasks[projI]["tasks"][i]["lastUpdated"] = "";
-      setProjectStatus(tasks[projI].project)
+      console.log(tasks[projI].project);
+      setProjectStatus(tasks[projI].project);
       setActiveTask({
         id: tasks[projI]["tasks"][i]["id"],
         isRunning: true,
@@ -191,7 +190,7 @@ const TaskAssign = () => {
     let task = [...taskArr];
     task[projI]["tasks"][i]["timer"] = val;
     task[projI]["tasks"][i]["lastUpdated"] = "";
-    setProjectStatus(task[projI].project,"inactive")
+    setProjectStatus(task[projI].project, "inactive");
     setTaskArr(task);
     localStorage.setItem("tasks", JSON.stringify(task));
     setActiveTask({ ...activeTask, isRunning: false });
@@ -217,34 +216,35 @@ const TaskAssign = () => {
 
   const stopTimer = (i, val, projI) => {
     const updatedTasks = [...taskArr];
-  
+
     // Update the timer and lastUpdated properties
     updatedTasks[projI].tasks[i] = {
       ...updatedTasks[projI].tasks[i],
       timer: val,
       lastUpdated: getCurrentDate(),
     };
-  
+
     // Set project status to "inactive"
     setProjectStatus(updatedTasks[projI].project, "inactive");
-  
+
     // Update the task array and store it in localStorage
     setTaskArr(updatedTasks);
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-  
+
     // Find the index of the active task and update its status
     if (activeTask && activeTask.id) {
-      const taskIndex = updatedTasks[projI].tasks.findIndex((v) => v.id === activeTask.id);
+      const taskIndex = updatedTasks[projI].tasks.findIndex(
+        (v) => v.id === activeTask.id
+      );
       if (taskIndex !== -1) {
         updatedTasks[projI].tasks[taskIndex].isRunning = false;
       }
     }
-  
+
     // Set the updated tasks and clear the active task
     setTaskArr(updatedTasks);
     setActiveTask(null);
   };
-  
 
   useEffect(() => {
     // Add the event listener when the component mounts
@@ -316,7 +316,6 @@ const TaskAssign = () => {
           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
         </svg>
         <span>Add Task</span>
-
       </button>
       <div className="w-full flex flex-col justify-center items-center">
         {taskArr
@@ -328,9 +327,12 @@ const TaskAssign = () => {
               style={{ boxShadow: "0px 0px 9px 4px rgb(0 0 0 / 0.25)" }}
             >
               <h2 className="text-left font-bold underline underline-offset-2">
-                Project:- {ts.project}
+                Project:-{" "}
+                {projectArr.map((val) => 
+                  val.id == ts.project && val.title
+                )}
               </h2>
-              
+
               <table className="w-full my-5">
                 <thead className="">
                   <tr className="bg-gray-300">
@@ -462,8 +464,7 @@ const TaskAssign = () => {
                     ))}
                 </tbody>
               </table>
-              </div>
-           
+            </div>
           ))}
       </div>
       <Modal
@@ -475,115 +476,114 @@ const TaskAssign = () => {
         cancelButtonProps={{ classNames: "bg-red-700 text-white py-2 px-4" }}
       >
         <form>
-        <div className="flex flex-col my-4">
-          <input
-            placeholder="Task Title"
-            value={assignTask.title || ""}
-            name="title"
-            onChange={(e) => enterTaskDetails(e)}
-            className="border border-gray-300 my-3 p-1"
-            required
-          />
-          <input
-            placeholder="Task Description (if any)"
-            value={assignTask.desc || ""}
-            name="desc"
-            onChange={(e) => enterTaskDetails(e)}
-            className="border border-gray-300 my-3 p-1"
-            required
-          />
-          <div className="w-full flex items-center gap-x-4 my-4">
-            <h3>Project: </h3>
-            {/* <div>
+          <div className="flex flex-col my-4">
+            <input
+              placeholder="Task Title"
+              value={assignTask.title || ""}
+              name="title"
+              onChange={(e) => enterTaskDetails(e)}
+              className="border border-gray-300 my-3 p-1"
+              required
+            />
+            <input
+              placeholder="Task Description (if any)"
+              value={assignTask.desc || ""}
+              name="desc"
+              onChange={(e) => enterTaskDetails(e)}
+              className="border border-gray-300 my-3 p-1"
+              required
+            />
+            <div className="w-full flex items-center gap-x-4 my-4">
+              <h3>Project: </h3>
+              {/* <div>
                             
                         </div> */}
-            <select
-              onFocus={() => setAddProjectModel(false)}
-              name="project"
-              onChange={(e) => enterTaskDetails(e)}
-              placeholder="--Select Project--"
-              className="bg-gray-300 rounded-lg py-2 border-b-2 border-gray-500 w-40"
-              required
-            >
-              <option>--Select Project--</option>
-              {JSON.parse(localStorage.getItem("projects") || "[]").map(
-                (opt, i) => (
-                  <option key={i} name={opt.title}>
-                    {opt.title}
-                  </option>
-                )
-              )}
-            </select>
-            <div>
-              {addProjectModal ? (
-                <div className="flex gap-x-2">
-                  <div>
-                    <input
-                      placeholder="Project Name"
-                      value={assignProject.title || ""}
-                      name="title"
-                      onChange={(e) => enterProjectDetails(e)}
-                      className="border border-gray-300 mt-1 p-1 w-full"
-                      required
-                    />
-                    <p className="text-red-600">{error}</p>
+              <select
+                onFocus={() => setAddProjectModel(false)}
+                name="project"
+                onChange={(e) => enterTaskDetails(e)}
+                placeholder="--Select Project--"
+                className="bg-gray-300 rounded-lg py-2 border-b-2 border-gray-500 w-40"
+                required
+              >
+                <option>--Select Project--</option>
+                {JSON.parse(localStorage.getItem("projects") || "[]").map(
+                  (opt, i) => (
+                    <option key={i} name={opt.title} value={opt.id}>
+                      {opt.title}
+                    </option>
+                  )
+                )}
+              </select>
+              <div>
+                {addProjectModal ? (
+                  <div className="flex gap-x-2">
+                    <div>
+                      <input
+                        placeholder="Project Name"
+                        value={assignProject.title || ""}
+                        name="title"
+                        onChange={(e) => enterProjectDetails(e)}
+                        className="border border-gray-300 mt-1 p-1 w-full"
+                        required
+                      />
+                      <p className="text-red-600">{error}</p>
+                    </div>
+                    <button
+                      className="bg-green-900 text-white px-4"
+                      onClick={addProject}
+                    >
+                      Submit
+                    </button>
                   </div>
-                  <button
-                    className="bg-green-900 text-white px-4"
-                    onClick={addProject}
-                  >
-                    Submit
-                  </button>
-                </div>
-              ) : (
-                <h4>
-                  Your Project is not listed here? Click{" "}
-                  <span
-                    className="text-blue-700"
-                    onClick={() => {
-                      setAddProjectModel(true);
-                      setAssignProject({});
-                    }}
-                  >
-                    Here!
-                  </span>{" "}
-                  to add new one
-                </h4>
-              )}
+                ) : (
+                  <h4>
+                    Your Project is not listed here? Click{" "}
+                    <span
+                      className="text-blue-700"
+                      onClick={() => {
+                        setAddProjectModel(true);
+                        setAssignProject({});
+                      }}
+                    >
+                      Here!
+                    </span>{" "}
+                    to add new one
+                  </h4>
+                )}
+              </div>
+            </div>
+            <div className="w-full flex items-center gap-x-4 my-4">
+              <h3>Priority: </h3>
+              <select
+                name="priority"
+                onChange={(e) => enterTaskDetails(e)}
+                placeholder="--Select Priority--"
+                className="bg-gray-300 rounded-lg py-2 border-b-2 border-gray-500"
+              >
+                <option></option>
+                <option name="High">High</option>
+                <option name="Medium">Medium</option>
+                <option name="Low">Low</option>
+              </select>
             </div>
           </div>
-          <div className="w-full flex items-center gap-x-4 my-4">
-            <h3>Priority: </h3>
-            <select
-              name="priority"
-              onChange={(e) => enterTaskDetails(e)}
-              placeholder="--Select Priority--"
-              className="bg-gray-300 rounded-lg py-2 border-b-2 border-gray-500"
+          <div className="w-full gap-4  flex justify-end">
+            <button
+              type="reset"
+              className="bg-red-600 rounded-lg text-white py-2 px-4"
+              onClick={clearAll}
             >
-              <option></option>
-              <option name="High">High</option>
-              <option name="Medium">Medium</option>
-              <option name="Low">Low</option>
-            </select>
+              Reset
+            </button>{" "}
+            {""}
+            <button
+              className="bg-green-900 rounded-lg text-white py-2 px-4"
+              onClick={handleOk}
+            >
+              Submit
+            </button>
           </div>
-        </div>
-        <div className="w-full gap-4  flex justify-end">
-        <button
-        type = "reset"
-            className="bg-red-600 rounded-lg text-white py-2 px-4"
-            onClick={clearAll}
-            
-          >
-            Reset
-          </button>{" "}
-          {""}
-          <button
-            className="bg-green-900 rounded-lg text-white py-2 px-4"
-            onClick={handleOk}
-          >
-            Submit
-          </button>
-        </div>
         </form>
       </Modal>
     </>

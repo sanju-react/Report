@@ -9,9 +9,9 @@ const ProjectAssign = () => {
   const [editMode, setEditMode] = useState(false);
   const [editIndex, setEditIndex] = useState("");
 
-  const getTasksCount = (project_name) => {
+  const getTasksCount = (project_id) => {
     const count = taskArr.map(
-      (val) => val.project === project_name && val.tasks.length
+      (val) => val.project == project_id && val.tasks.length
     );
     return count;
   };
@@ -60,7 +60,10 @@ const ProjectAssign = () => {
   const handleOk = (e) => {
     e.preventDefault();
     if (editMode) {
+      showModal();
+
       // Retrieve array from localStorage
+
       let storedArray = JSON.parse(localStorage.getItem("projects"));
       storedArray[editIndex].title = assignProject.title;
       setProjectArr(storedArray);
@@ -101,8 +104,14 @@ const ProjectAssign = () => {
   };
 
   const handleEdit = (i) => {
-    alert(i)
+    setEditMode(true);
     setEditIndex(i);
+    showModal(true);
+
+    let project = [...projectArr];
+    let obj = { ...assignProject };
+    obj["title"] = project[i].title;
+    setAssignProject(obj);
   };
 
   useEffect(() => {
@@ -169,7 +178,7 @@ const ProjectAssign = () => {
               type="submit"
               className="bg-blue-500 rounded-md text-white py-2 px-4"
             >
-              Submit
+              {editMode ? "Update" : "Submit"}
             </button>
           </div>
         </form>
@@ -214,7 +223,10 @@ const ProjectAssign = () => {
                         {val.title}
                       </td>
                       <td className="px-6 text-center py-4 whitespace-nowrap">
-                        {getTasksCount(val.title) && getTasksCount(val.title)}
+                        {getTasksCount(val.id).filter(Boolean).length === 0
+                          ? 0
+                          : getTasksCount(val.id) &&
+                            getTasksCount(val.id)}
                       </td>
                       <td className="px-6 text-center py-4 whitespace-nowrap">
                         <span
