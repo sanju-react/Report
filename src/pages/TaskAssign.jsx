@@ -317,31 +317,29 @@ const TaskAssign = () => {
         </svg>
         <span>Add Task</span>
       </button>
-      <div className="w-full flex flex-col justify-center items-center">
+      <div className="w-full flex  flex-col justify-center items-center">
         {taskArr
           .filter((ts) => ts.project !== "")
           .map((ts, ind) => (
             <div
               key={ind}
-              className="h-[300px] w-[90%] my-4 p-3 overflow-y-scroll"
+              className="h-[300px] w-[90%] my-4 p-3 rounded-md overflow-y-scroll"
               style={{ boxShadow: "0px 0px 9px 4px rgb(0 0 0 / 0.25)" }}
             >
-              <h2 className="text-left font-bold underline underline-offset-2">
+              <h2 className="text-left  font-bold underline underline-offset-2">
                 Project:-{" "}
-                {projectArr.map((val) => 
-                  val.id == ts.project && val.title
-                )}
+                {projectArr.map((val) => val.id == ts.project && val.title)}
               </h2>
 
               <table className="w-full my-5">
                 <thead className="">
-                  <tr className="bg-gray-300">
+                  <tr className="bg-gray-300 justify-evenly">
                     <th className="py-3">Assign Date</th>
                     <th className="py-3">Task</th>
                     <th className="py-3">Priority</th>
                     <th className="py-3">Status</th>
                     <th className="py-3">Total Time</th>
-                    <th className="flex gap-x-3 items-center py-3">Action</th>
+                    <th className=" py-3">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -349,10 +347,10 @@ const TaskAssign = () => {
                     .filter((v) => v.title !== "")
                     .map((v, i) => (
                       <tr key={i}>
-                        <td>{v.date}</td>
-                        <td>{v.title}</td>
-                        <td>
-                          <select
+                        <td className="text-center">{v.date}</td>
+                        <td className="text-center">{v.title}</td>
+                        <td className="text-center">
+                          {/* <select
                             name="priority"
                             onChange={(e) => changePriority(i, e)}
                             value={!!v.priority ? v.priority : "Not Selected"}
@@ -362,7 +360,17 @@ const TaskAssign = () => {
                             <option name="High">High</option>
                             <option name="Medium">Medium</option>
                             <option name="Low">Low</option>
-                          </select>
+                          </select> */}
+                           <span
+                           
+                           className={`${v.priority==="Low" ? "font-bold text-gray-600" : v.priority==="Medium" ? "font-bold text-yellow-400" : " font-bold text-red-400" }`}
+                            
+                            
+                          >
+
+                            {v.priority}
+                            
+                          </span>
                         </td>
                         <td className="py-3">
                           <>
@@ -386,14 +394,14 @@ const TaskAssign = () => {
                                 <button
                                   onClick={() => stopTimer(i, "Stopped", ind)}
                                   className={
-                                    "bg-red-500 px-2 text-white py-0 rounded"
+                                    "bg-red-500 px-2 items-center text-white py-0 rounded"
                                   }
                                 >
                                   {v.timer}
                                 </button>
                               </div>
                             ) : v.timer === "paused" ? (
-                              <div className="flex gap-x-5 justify-center">
+                              <div className="flex gap-x-5 items-center justify-center">
                                 <button
                                   onClick={() => startTimer(i, "stop", ind)}
                                   className={
@@ -405,7 +413,7 @@ const TaskAssign = () => {
                                 <button
                                   onClick={() => stopTimer(i, "Stopped", ind)}
                                   className={
-                                    "bg-red-500 px-2 text-white py-0 rounded"
+                                    "bg-red-500  px-2 text-white py-0 rounded"
                                   }
                                 >
                                   stop
@@ -431,7 +439,7 @@ const TaskAssign = () => {
                             )}
                           </>
                         </td>
-                        <td className="flex justify-center items-center h-full">
+                        <td className="flex justify-center text-center p-5 items-center h-full">
                           <div className="flex gap-x-5 items-center">
                             {v.time}
                             <Tooltip
@@ -457,9 +465,39 @@ const TaskAssign = () => {
                                 <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
                               </svg>
                             </Tooltip>
+                            
                           </div>
                         </td>
-                        <td>{/* <a href="#">Show Details</a> */}</td>
+                        <td className="px-6 text-center  py-4 whitespace-nowrap">
+                              <button className="hover:scale-125 p-2 font-medium  text-blue-600 rounded-md hover:text-blue-500 focus:outline-none focus:shadow-outline-blue active:text-blue-600 transition duration-150 ease-in-out">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="16"
+                                  height="16"
+                                  fill="currentColor"
+                                  className="bi bi-pencil-square"
+                                  viewBox="0 0 16 16"
+                                >
+                                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
+                                  />
+                                </svg>
+                              </button>
+                              <button className="ml-2 hover:scale-125   py-2 font-medium  text-red-600 rounded-md hover:text-red-500 focus:outline-none focus:shadow-outline-red active:text-red-600 transition duration-150 ease-in-out">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="16"
+                                  height="16"
+                                  fill="currentColor"
+                                  className="bi bi-trash3"
+                                  viewBox="0 0 16 16"
+                                >
+                                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                                </svg>
+                              </button>
+                            </td>
                       </tr>
                     ))}
                 </tbody>
@@ -561,7 +599,7 @@ const TaskAssign = () => {
                 placeholder="--Select Priority--"
                 className="bg-gray-300 rounded-lg py-2 border-b-2 border-gray-500"
               >
-                <option></option>
+               
                 <option name="High">High</option>
                 <option name="Medium">Medium</option>
                 <option name="Low">Low</option>
