@@ -1,5 +1,7 @@
 import { Modal } from "antd";
 import React, { useEffect, useState } from "react";
+import { addProjects } from "../firebase/projects";
+import { getProjects } from "../firebase/projects";
 
 const ProjectAssign = () => {
   const [assignProject, setAssignProject] = useState({});
@@ -17,6 +19,7 @@ const ProjectAssign = () => {
   };
 
   const addRow = () => {
+    console.log(getProjects());
     let project = [...projectArr];
     let obj = { ...assignProject };
 
@@ -29,6 +32,8 @@ const ProjectAssign = () => {
       obj["assignedtask"] = 0;
       obj["time"] = "00:00:00";
       obj["status"] = "inactive";
+
+      addProjects(obj);
       project.push(obj);
       setProjectArr(project);
       localStorage.setItem("projects", JSON.stringify(project));
@@ -226,11 +231,8 @@ const ProjectAssign = () => {
                       <td className="px-6 text-center py-4 whitespace-nowrap">
                         {getTasksCount(val.id).filter(Boolean).length === 0
                           ? 0
-                          : getTasksCount(val.id) &&
-                            getTasksCount(val.id)}
+                          : getTasksCount(val.id) && getTasksCount(val.id)}
                       </td>
-
-                     
 
                       <td className="px-6 text-center py-4 whitespace-nowrap">
                         <span
